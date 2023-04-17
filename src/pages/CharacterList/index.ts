@@ -1,0 +1,1 @@
+export { CharacterListLazy as CharacterList } from './CharacterListLazy'

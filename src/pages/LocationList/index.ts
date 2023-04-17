@@ -1,0 +1,1 @@
+export { LocationListLazy as LocationList } from './LocationListLazy'

@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { MantineProvider } from '@mantine/core'
+import { Route, Routes } from 'react-router-dom'
 
-function App() {
-  const [count, setCount] = useState(0)
+import { AuthProvider } from '@context/AuthProvider'
+import { MainLayout } from '@layout/MainLayout'
+import { CategoryLayout } from '@layout/CategoryLayout'
+import { Home } from '@pages/Home'
+import { Categories } from '@pages/Categories'
+import { CharacterList } from '@pages/CharacterList'
+import { Authorization } from '@pages/Authorization'
+import { Character } from '@pages/Character'
+import { NotFound } from '@pages/NotFound'
+import { EpisodeList } from '@pages/EpisodeList'
+import { Episode } from '@pages/Episode'
+import { LocationList } from '@pages/LocationList'
+import { Location } from '@pages/Location'
 
+export function App() {
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    <MantineProvider withNormalizeCSS withGlobalStyles>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<Home />} />
+            <Route path="categories" element={<Categories />}>
+              <Route path="characters" element={<CategoryLayout />}>
+                <Route index element={<CharacterList />} />
+                <Route path=":id" element={<Character />} />
+              </Route>
+              <Route path="episodes" element={<CategoryLayout />}>
+                <Route index element={<EpisodeList />} />
+                <Route path=":id" element={<Episode />} />
+              </Route>
+              <Route path="locations" element={<CategoryLayout />}>
+                <Route index element={<LocationList />} />
+                <Route path=":id" element={<Location />} />
+              </Route>
+            </Route>
+          </Route>
+          <Route path="/login" element={<Authorization />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </AuthProvider>
+    </MantineProvider>
   )
 }
-
-export default App
