@@ -25,7 +25,7 @@ export default defineConfig({
       manifest: {
         name: 'Rick & Morty: Wiki',
         short_name: 'R&M Wiki',
-        start_url: '/index.html',
+        start_url: '/',
         display: 'standalone',
         background_color: '#FFFFFF',
         theme_color: '#00B2C6',
