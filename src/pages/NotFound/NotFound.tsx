@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Space, Title, Text } from '@mantine/core'
+import { Space, Title, Text, Container } from '@mantine/core'
 
 export const NotFound: React.FC = () => {
-  const [timer, setTimer] = useState(5)
+  const [timer, setTimer] = useState(3)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -17,10 +17,10 @@ export const NotFound: React.FC = () => {
   }, [navigate, timer])
 
   return (
-    <>
+    <Container size="lg" py="md">
       <Title order={1}>Page not found</Title>
       <Space h="md" />
       <Text size="xl">Return to Home in {timer} sec</Text>
-    </>
+    </Container>
   )
 }
